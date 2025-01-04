@@ -1,0 +1,8 @@
+.search-btn {
+  background: linear-gradient(
+    90deg,
+    #3a15ff 10%,
+    #9c48fd,
+    hsl(337, 90%, 71%) 70%
+  );
+}
