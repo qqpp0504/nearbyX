@@ -1,12 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import noLocationImage from "../assets/no-location.png";
 
 export default function Map() {
   const mapContainerRef = useRef();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     getLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function showError() {
+    setError(true);
+  }
 
   function initLocation(position) {
     const userLocation = new window.google.maps.LatLng(
@@ -27,8 +34,6 @@ export default function Map() {
     new window.google.maps.Map(mapContainerRef.current, mapOptions);
   }
 
-  function showError() {}
-
   // 獲取使用者的地理位置
   function getLocation() {
     if (navigator.geolocation) {
@@ -38,5 +43,14 @@ export default function Map() {
     }
   }
 
-  return <div ref={mapContainerRef} className="h-screen"></div>;
+  return (
+    <div ref={mapContainerRef} className="h-screen">
+      {error && (
+        <div className="fixed bottom-0 h-64 bg-white w-full rounded-t-3xl flex flex-col items-center justify-center gap-5">
+          <img src={noLocationImage} alt="Unable to retrieve location image." />
+          <p className="text-gray-400">該裝置不支持 GPS</p>
+        </div>
+      )}
+    </div>
+  );
 }

@@ -1,0 +1,11 @@
+.open-screen {
+  background: linear-gradient(
+    -190deg,
+    #3a15ff 10%,
+    #9c48fd,
+    hsl(337, 90%, 71%) 70%
+  );
+  /* background-image: url('../../assets/screen_open.png');
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
