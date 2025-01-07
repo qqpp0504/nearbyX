@@ -17,7 +17,7 @@ function App() {
       {!visible && (
         <>
           <Map />
-          <Search onSearch={(data) => console.log(data)} />
+          <Search />
         </>
       )}
     </div>

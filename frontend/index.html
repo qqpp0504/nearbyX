@@ -6,10 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>nearbyX</title>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChVanIlfZ6XrUiw4FDLUlZJObOOcjN9J0"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChVanIlfZ6XrUiw4FDLUlZJObOOcjN9J0&callback=initMap"
       async
       defer
     ></script>
+    <script>
+      function initMap() {
+        google.maps.importLibrary("places").then((res) => {
+          const { Place, SearchNearbyRankPreference } = res;
+          window.Place = Place;
+          window.SearchNearbyRankPreference = SearchNearbyRankPreference;
+        });
+        google.maps.importLibrary("marker").then((res) => {
+          const { AdvancedMarkerElement, PinElement } = res;
+          window.AdvancedMarkerElement = AdvancedMarkerElement;
+          window.PinElement = PinElement;
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

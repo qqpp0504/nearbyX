@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 
 import "./Search.css";
 import downIcon from "../assets/down-icon.png";
+import EventEmitter from "../utils/EventEmitter.js";
 
 const PLACETYPES = [
   {
@@ -23,8 +23,8 @@ const PLACETYPES = [
   },
 ];
 
-export default function Search({ onSearch }) {
-  const [radius, setRadius] = useState();
+export default function Search() {
+  const [radius, setRadius] = useState("");
   const [current, setCurrent] = useState(PLACETYPES[0]);
   const [visible, setVisible] = useState(false);
 
@@ -45,8 +45,12 @@ export default function Search({ onSearch }) {
     }
   }
 
-  function handleSearch() {
-    onSearch({ type: current.value, radius });
+  function handleClick() {
+    EventEmitter.emit("search", {
+      type: current.value,
+      radius: parseInt(radius),
+    });
+    // onSearch({ type: current.value, radius: parseInt(radius) });
   }
 
   return (
@@ -71,7 +75,7 @@ export default function Search({ onSearch }) {
       </div>
 
       <button
-        onClick={handleSearch}
+        onClick={handleClick}
         className="search-btn rounded-3xl w-16 py-1 text-center text-white"
       >
         搜尋
