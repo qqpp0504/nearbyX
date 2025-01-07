@@ -3,6 +3,24 @@ import { useEffect, useRef, useState } from "react";
 import noLocationImage from "../assets/no-location.png";
 import EventEmitter from "../utils/EventEmitter.js";
 
+// 根據給定的半徑來決定地圖縮放等級
+function getZoomLevel(radius) {
+  const zoomRadiusMap = [
+    { radius: 100, zoom: 18 },
+    { radius: 200, zoom: 17 },
+    { radius: 500, zoom: 16 },
+    { radius: 1000, zoom: 15.5 },
+    { radius: 3000, zoom: 14 },
+    { radius: 5000, zoom: 14.5 },
+  ];
+
+  for (const entry of zoomRadiusMap) {
+    if (radius <= entry.radius) return entry.zoom;
+  }
+
+  return 10;
+}
+
 export default function Map() {
   const map = useRef();
   const [error, setError] = useState(false);
@@ -64,6 +82,7 @@ export default function Map() {
     }).then((res) => {
       const { places } = res;
       setPlaces(places);
+      map.current.setZoom(getZoomLevel(radius));
     });
   }
 
