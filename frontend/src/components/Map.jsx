@@ -83,6 +83,7 @@ export default function Map() {
       const { places } = res;
       setPlaces(places);
       map.current.setZoom(getZoomLevel(radius));
+      EventEmitter.emit("nearbyPlaces", places);
     });
   }
 
