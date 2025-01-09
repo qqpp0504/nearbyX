@@ -5,10 +5,12 @@ import "swiper/css";
 
 import closeIcon from "../assets/close-icon.png";
 import Place from "./Place.jsx";
+import Comment from "./Comment.jsx";
 
 export default function PlaceDetail({ placeItem, onClose }) {
   const [photoIndex, setPhotoIndex] = useState(0);
 
+  console.log(placeItem);
   return (
     <div className="fixed flex flex-col top-[5%] z-20 overflow-hidden h-[95%] w-full bg-white rounded-t-2xl shadow-top">
       <div className="h-[270px] bg-gray-500 relative shrink-0 overflow-hidden z-10">
@@ -30,9 +32,9 @@ export default function PlaceDetail({ placeItem, onClose }) {
         </Swiper>
 
         <div className="flex text-[10px] items-end absolute right-3 bottom-10 z-20 text-white bg-gray-900 rounded-xl w-fit px-2">
-          <div className="text-[12px]">{photoIndex + 1}</div>
+          <span className="text-[12px]">{photoIndex + 1}</span>
           <div className="mx-[2px]">/</div>
-          <div>{placeItem.photos.length}</div>
+          <span>{placeItem.photos.length}</span>
         </div>
       </div>
 
@@ -41,8 +43,12 @@ export default function PlaceDetail({ placeItem, onClose }) {
       </div>
 
       <div className="px-4 pt-4 grow overflow-hidden  flex flex-col">
-        <span className="text-gray-800 font-semibold">評價(22)</span>
-        <div className="overflow-scroll grow"></div>
+        <span className="text-gray-800 font-semibold">{`評價(${placeItem.reviews.length})`}</span>
+        <div className="overflow-scroll grow">
+          {placeItem.reviews?.map((review, index) => (
+            <Comment key={index} review={review} />
+          ))}
+        </div>
       </div>
     </div>
   );
