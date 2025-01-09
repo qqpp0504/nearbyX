@@ -4,13 +4,13 @@ import distanceIcon from "../assets/distance-icon.png";
 import { isPlaceOpen } from "../utils/isPlaceOpen.js";
 import noImageIcon from "../assets/no-image-icon.png";
 
-export default function Place({ placesItem, type = 1 }) {
+export default function Place({ placeItem, type = 1, onClick }) {
   // 店家營業狀況
   let operatingStatusClasses =
     "px-1 leading-5 text-center rounded text-[10px] font-normal";
 
   let operatingStatus;
-  const openingHours = placesItem.regularOpeningHours;
+  const openingHours = placeItem.regularOpeningHours;
 
   if (openingHours) {
     if (isPlaceOpen(openingHours.weekdayDescriptions)) {
@@ -28,7 +28,7 @@ export default function Place({ placesItem, type = 1 }) {
   // 計算與目的地之間的距離
   function countDistance() {
     let distance = window.google.maps.geometry.spherical.computeDistanceBetween(
-      placesItem.location,
+      placeItem.location,
       window.userLocation
     );
 
@@ -42,13 +42,13 @@ export default function Place({ placesItem, type = 1 }) {
   }
 
   return (
-    <div className="flex justify-between items-center mt-3 pb-3 border-b-2 border-gray-50 w-full">
+    <div className="flex justify-between items-center pt-3 pb-3 border-b-2 border-gray-50 w-full">
       <div className="flex justify-between items-center gap-4">
         {type === 1 && (
           <>
-            {placesItem.photos[0] ? (
+            {placeItem.photos[0] ? (
               <img
-                src={placesItem.photos[0]?.getURI()}
+                src={placeItem.photos[0]?.getURI()}
                 alt="店家圖片"
                 className="w-[100px] h-[70px] rounded-md overflow-hidden"
               ></img>
@@ -61,12 +61,15 @@ export default function Place({ placesItem, type = 1 }) {
           </>
         )}
 
-        <div className="w-[230px]">
+        <button
+          onClick={type === 1 ? onClick : undefined}
+          className={`w-[230px] flex flex-col ${type === 2 && "cursor-text"}`}
+        >
           <span className="text-gray-700 font-semibold">
-            {placesItem.displayName}
+            {placeItem.displayName}
           </span>
           <div className="text-xs text-gray-600 mt-1">
-            {placesItem.formattedAddress}
+            {placeItem.formattedAddress}
           </div>
           <div className="flex mt-1 justify-start">
             <div className={operatingStatusClasses}>{operatingStatus}</div>
@@ -76,10 +79,10 @@ export default function Place({ placesItem, type = 1 }) {
                 src={ratingStarIcon}
                 alt="Rating star icon"
               />
-              <span>{placesItem.rating}</span>
+              <span>{placeItem.rating}</span>
             </div>
           </div>
-        </div>
+        </button>
       </div>
 
       <div className="position w-[37px] text-center">
