@@ -65,6 +65,7 @@ export default function Map() {
         "photos",
         "location",
         "businessStatus",
+        "regularOpeningHours",
         "rating",
         "formattedAddress",
         "reviews",
