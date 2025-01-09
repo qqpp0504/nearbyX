@@ -48,12 +48,12 @@ export default function Map() {
   useEffect(() => {
     if (places.length > 0) {
       places.forEach((item) => {
-        new window.AdvancedMarkerElement({
+        new window.google.maps.marker.AdvancedMarkerElement({
           map: map.current,
           position: item.location,
-          content: new window.PinElement({
-            background: "#FBBC04",
-            borderColor: "#137333",
+          content: new window.google.maps.marker.PinElement({
+            background: "#4a82ff",
+            borderColor: "#a8c2f7",
             glyphColor: "white",
           }).element,
         });

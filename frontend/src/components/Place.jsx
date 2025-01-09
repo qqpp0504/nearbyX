@@ -47,16 +47,18 @@ export default function Place({ placeItem, type = 1, onClick }) {
   }
 
   return (
-    <div className="flex justify-between items-center pt-3 pb-3 border-b-2 border-gray-50 w-full">
+    <div className="flex justify-between items-center mt-3 pb-3 border-b-2 border-gray-50 w-full">
       <div className="flex justify-between items-center gap-4">
         {type === 1 && (
           <>
             {placeItem.photos[0] ? (
-              <img
-                src={placeItem.photos[0]?.getURI()}
-                alt="店家圖片"
-                className="w-[100px] h-[70px] rounded-md overflow-hidden"
-              ></img>
+              <div className="w-[100px] h-[70px]">
+                <img
+                  src={placeItem.photos[0]?.getURI()}
+                  alt="店家圖片"
+                  className="w-full h-full rounded-md overflow-hidden"
+                ></img>
+              </div>
             ) : (
               <div className="w-[100px] h-[70px] flex flex-col gap-1 justify-center items-center">
                 <img src={noImageIcon} alt="No store image." className="w-7" />
@@ -68,7 +70,9 @@ export default function Place({ placeItem, type = 1, onClick }) {
 
         <button
           onClick={type === 1 ? onClick : undefined}
-          className={`w-[230px] flex flex-col ${type === 2 && "cursor-text"}`}
+          className={`w-[200px] flex flex-col text-left ${
+            type === 2 && "cursor-text"
+          }`}
         >
           <span className="text-gray-700 font-semibold">
             {placeItem.displayName}
@@ -90,7 +94,7 @@ export default function Place({ placeItem, type = 1, onClick }) {
         </button>
       </div>
 
-      <div className="position w-[37px] text-center">
+      <div className="position w-[37px] text-center ml-3">
         <button onClick={handleRenderRoute}>
           <img src={distanceIcon} alt="Map pin icon" />
         </button>

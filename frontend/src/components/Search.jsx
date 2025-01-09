@@ -58,7 +58,13 @@ export default function Search() {
       <div className="flex justify-between items-center gap-1">
         <button onClick={handleShowMore} className="flex items-center gap-1">
           <span style={{ color: visible && "#9a53f4" }}>{current.name}</span>
-          <img src={downIcon} alt="Down icon" />
+          <img
+            src={downIcon}
+            alt="Down icon"
+            className={`transition-all duration-200 ${
+              visible ? "rotate-180" : "rotate-0"
+            }`}
+          />
         </button>
 
         <div className="ml-1" style={{ color: "#c4c7ce" }}>

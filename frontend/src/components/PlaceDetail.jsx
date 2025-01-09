@@ -43,7 +43,7 @@ export default function PlaceDetail({ placeItem, onClose }) {
 
       <div className="px-4 pt-4 grow overflow-hidden flex flex-col">
         <span className="text-gray-800 font-semibold">{`評價(${placeItem.reviews.length})`}</span>
-        <div className="overflow-scroll grow">
+        <div className="overflow-scroll grow my-5 flex flex-col gap-5">
           {placeItem.reviews?.map((review, index) => (
             <Comment key={index} review={review} />
           ))}

@@ -37,7 +37,7 @@ export default function PlaceList() {
     <>
       {visible && (
         <div>
-          <div className="fixed bottom-0 h-64 bg-white w-full rounded-t-3xl flex flex-col items-center justify-center shadow-2xl overflow-scroll pt-3 px-5">
+          <div className="fixed bottom-0 max-h-64 bg-white w-full rounded-t-3xl flex flex-col items-start shadow-2xl overflow-scroll pt-3 px-5">
             {places ? (
               places.map((place) => (
                 <Place
@@ -55,6 +55,7 @@ export default function PlaceList() {
               </>
             )}
           </div>
+
           {detailVisible && (
             <PlaceDetail placeItem={place} onClose={handleCloseDetail} />
           )}
