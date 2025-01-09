@@ -3,6 +3,7 @@ import ratingStarIcon from "../assets/rating-star-icon.png";
 import distanceIcon from "../assets/distance-icon.png";
 import { isPlaceOpen } from "../utils/isPlaceOpen.js";
 import noImageIcon from "../assets/no-image-icon.png";
+import EventEmitter from "../utils/EventEmitter.js";
 
 export default function Place({ placeItem, type = 1, onClick }) {
   // 店家營業狀況
@@ -39,6 +40,10 @@ export default function Place({ placeItem, type = 1, onClick }) {
     }
 
     return distance;
+  }
+
+  function handleRenderRoute() {
+    EventEmitter.emit("renderRoute", placeItem.location);
   }
 
   return (
@@ -86,7 +91,9 @@ export default function Place({ placeItem, type = 1, onClick }) {
       </div>
 
       <div className="position w-[37px] text-center">
-        <img src={distanceIcon} alt="Map pin icon" />
+        <button onClick={handleRenderRoute}>
+          <img src={distanceIcon} alt="Map pin icon" />
+        </button>
         <div className="text-xs text-gray-600 mt-1">{countDistance()}</div>
       </div>
     </div>

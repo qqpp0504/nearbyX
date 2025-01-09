@@ -10,7 +10,6 @@ import Comment from "./Comment.jsx";
 export default function PlaceDetail({ placeItem, onClose }) {
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  console.log(placeItem);
   return (
     <div className="fixed flex flex-col top-[5%] z-20 overflow-hidden h-[95%] w-full bg-white rounded-t-2xl shadow-top">
       <div className="h-[270px] bg-gray-500 relative shrink-0 overflow-hidden z-10">
@@ -42,7 +41,7 @@ export default function PlaceDetail({ placeItem, onClose }) {
         <Place type={2} placeItem={placeItem} />
       </div>
 
-      <div className="px-4 pt-4 grow overflow-hidden  flex flex-col">
+      <div className="px-4 pt-4 grow overflow-hidden flex flex-col">
         <span className="text-gray-800 font-semibold">{`評價(${placeItem.reviews.length})`}</span>
         <div className="overflow-scroll grow">
           {placeItem.reviews?.map((review, index) => (

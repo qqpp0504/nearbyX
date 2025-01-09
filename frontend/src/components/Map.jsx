@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import noLocationImage from "../assets/no-location.png";
 import EventEmitter from "../utils/EventEmitter.js";
 
+const directionsRenderer = new window.google.maps.DirectionsRenderer();
+
 // 根據給定的半徑來決定地圖縮放等級
 function getZoomLevel(radius) {
   const zoomRadiusMap = [
@@ -37,6 +39,10 @@ export default function Map() {
         doSearchNearby(data);
       }
     });
+
+    EventEmitter.on("renderRoute", (pos) => {
+      renderRoute(pos);
+    });
   }, []);
 
   useEffect(() => {
@@ -55,6 +61,7 @@ export default function Map() {
     }
   }, [places]);
 
+  // 搜尋半徑內的地點
   function doSearchNearby(data) {
     const { type, radius } = data;
 
@@ -126,6 +133,28 @@ export default function Map() {
     } else {
       showError();
     }
+  }
+
+  // 繪製路線
+  function renderRoute(pos) {
+    // 創建 Directions Service 和 Directions Renderer
+    const directionsService = new window.google.maps.DirectionsService();
+
+    directionsRenderer.setMap(map.current);
+    directionsService.route(
+      {
+        origin: window.userLocation,
+        destination: pos,
+        travelMode: window.google.maps.TravelMode.WALKING,
+      },
+      (res, status) => {
+        if (status === "OK") {
+          directionsRenderer.setDirections(res);
+        } else {
+          alert("路線繪製失敗");
+        }
+      }
+    );
   }
 
   return (

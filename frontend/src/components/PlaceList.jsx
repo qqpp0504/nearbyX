@@ -18,6 +18,10 @@ export default function PlaceList() {
         setPlaces(data);
       }
     });
+
+    EventEmitter.on("renderRoute", () => {
+      setDetailVisible(false);
+    });
   }, []);
 
   function handleOpenDetail(place) {
