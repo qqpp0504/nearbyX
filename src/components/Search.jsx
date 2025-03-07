@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./Search.css";
+import classes from "./Search.module.css";
 import downIcon from "../assets/down-icon.png";
 import EventEmitter from "../utils/EventEmitter.js";
 
@@ -82,7 +82,7 @@ export default function Search() {
 
       <button
         onClick={handleClick}
-        className="search-btn rounded-3xl w-16 py-1 text-center text-white"
+        className={`rounded-3xl w-16 py-1 text-center text-white ${classes["search-btn"]}`}
       >
         搜尋
       </button>

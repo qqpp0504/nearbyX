@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import ratingStarIcon from "../assets/rating-star-icon.png";
 import distanceIcon from "../assets/distance-icon.png";
 import { isPlaceOpen } from "../utils/isPlaceOpen.js";

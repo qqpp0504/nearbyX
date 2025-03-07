@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import "./OpenScreen.css";
+import classes from "./OpenScreen.module.css";
 import screenBuildingImage from "../assets/screen-building.png";
 
 export default function OpenScreen({ onClick }) {
@@ -8,7 +7,9 @@ export default function OpenScreen({ onClick }) {
   }
 
   return (
-    <div className="open-screen text-white fixed w-full h-full flex flex-col justify-center items-center">
+    <div
+      className={`text-white fixed w-full h-full flex flex-col justify-center items-center ${classes["open-screen"]}`}
+    >
       <img
         src={screenBuildingImage}
         alt="App logo displaying the brand emblem."
