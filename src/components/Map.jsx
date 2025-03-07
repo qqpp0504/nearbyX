@@ -3,8 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import noLocationImage from "../assets/no-location.png";
 import EventEmitter from "../utils/EventEmitter.js";
 
-const directionsRenderer = new window.google.maps.DirectionsRenderer();
-
 // 根據給定的半徑來決定地圖縮放等級
 function getZoomLevel(radius) {
   const zoomRadiusMap = [
@@ -134,6 +132,8 @@ export default function Map() {
       showError();
     }
   }
+
+  const directionsRenderer = new window.google.maps.DirectionsRenderer();
 
   // 繪製路線
   function renderRoute(pos) {
